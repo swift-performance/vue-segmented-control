@@ -11,6 +11,10 @@
 <script>
   export default {
     props: {
+      value: {
+        type: null,
+        required: false
+      },
       options: {
         type: Array,
         required: true
@@ -64,6 +68,20 @@
       }
     },
     methods: {
+      update () {
+        this.optionsSelected = []
+        if (this.multiple === true) {
+          if (this.value instanceof Array) {
+            for (let val in this.value) {
+              this.optionsSelected.push(this.options.find(optionSelected => optionSelected.value === this.value[val]))
+            }
+          } else {
+            this.optionsSelected = this.options.find(optionSelected => optionSelected.value === this.value[val])
+          }
+        } else {
+          this.optionsSelected = [this.options.find(optionSelected => optionSelected.value === this.value)]
+        }
+      },
       onSelect (option) {
         if (this.multiple === true) {
           if (this.optionsSelected.find(optionSelected => optionSelected.value === option.value)) {
