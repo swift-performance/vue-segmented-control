@@ -67,6 +67,11 @@
         return this.optionsSelected.map(option => option[this.segValue])
       }
     },
+    mounted () {
+      this.$nextTick(() => {
+        this.update()
+      })
+    },
     methods: {
       update () {
         this.optionsSelected = []
